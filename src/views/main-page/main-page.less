@@ -1,0 +1,24 @@
+.main-page{
+  display: flex;
+  flex-wrap: wrap;
+  .content{
+    width: calc(100vw - 256px);
+    position: relative;
+    .map-content{
+      height: 100%;
+      width: 100%;
+      .foo{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+      }
+      .amap{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+      }
+    }
+  }
+}

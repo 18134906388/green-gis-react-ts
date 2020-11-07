@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=1.4.15&key=4e777414d38fb14b43efebfd3dae1af2"></script>
+    <title>首页</title>
+    <%htmlWebpackPlugin.options.dependencies.css.forEach(css=>{%>
+    <link rel="stylesheet" href="<%= css %>">
+    <%})%>
+</head>
+<body>
+<div id="root"></div>
+<%htmlWebpackPlugin.options.dependencies.js.forEach(js=>{%>
+<script src="<%=js%>"></script>
+<%})%>
+</body>
+</html>
