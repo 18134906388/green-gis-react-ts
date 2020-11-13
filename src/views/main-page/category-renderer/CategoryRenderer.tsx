@@ -23,10 +23,11 @@ import {
   LatLngType,
   GCJ02,
 } from '@src/library/green-gis-js/src/index';
-
+let amap = null;
+let map = null;
 export default class CategoryRendererComponent extends React.Component {
   componentDidMount() {
-    const amap = new window['AMap'].Map('amap', {
+    amap = new window['AMap'].Map('amap', {
       fadeOnZoom: false,
       navigationMode: 'classic',
       optimizePanAnimation: false,
@@ -43,7 +44,7 @@ export default class CategoryRendererComponent extends React.Component {
       features: ['road', 'point', 'bg'],
       viewMode: '2D',
     });
-    const map = new Map('foo');
+    map = new Map('foo');
     map.on('extent', event => {
       amap.setZoomAndCenter(event.zoom, event.center);
     });
@@ -90,10 +91,16 @@ export default class CategoryRendererComponent extends React.Component {
       });
       map.insertLayer(featureLayer, 0);
     };
-    req.open('GET', '../src/assets/geojson/beijing.json', true);
+    req.open('GET', '/public/geojson/beijing.json', true);
     req.send(null);
     // 缩放级别要为整数，不然会出现点位每次重绘 位置都会变化的情况
     map.setView([116.391193, 39.907776], 8);
+  }
+  componentWillUnmount() {
+    map.destroy();
+    amap.destroy();
+    amap = null;
+    map = null;
   }
   render() {
     return (

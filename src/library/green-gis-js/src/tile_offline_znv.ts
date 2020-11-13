@@ -1,10 +1,10 @@
 import { Map } from './map';
 import { Subject } from './util/subject';
 /**
- * 动画效果的管理器
+ * 离线地图
  * 已内置于map，可通过map的接口进行添加删除的维护操作
  */
-export class Tile extends Subject {
+export class TileOfflineZnv extends Subject {
   private _container: HTMLDivElement;
   private _map: Map;
   /**
@@ -72,11 +72,22 @@ export class Tile extends Subject {
       );
       return [pixelX, pixelY];
     };
+    // 给8位字符串文件名补0
+    function zeroFill(num, len, radix) {
+      let str = num.toString(radix || 10);
+      while (str.length < len) {
+        str = '0' + str;
+      }
+      return str;
+    }
     const getUrl = (url, x, y, z) => {
+      const x1 = 'C' + zeroFill(x, 8, 16);
+      const y1 = 'R' + zeroFill(y, 8, 16);
+      const z1 = 'L' + zeroFill(z, 2, 10);
       return url
-        .replace('{x}', x)
-        .replace('{y}', y)
-        .replace('{z}', z);
+        .replace('{x}', x1.toUpperCase())
+        .replace('{y}', y1.toUpperCase())
+        .replace('{z}', z1.toUpperCase());
     };
     const projection = this._map.projection;
     const extent = this._map.extent;

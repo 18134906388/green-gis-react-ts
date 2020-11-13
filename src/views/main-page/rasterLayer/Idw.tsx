@@ -1,31 +1,24 @@
 /**
- * 分级渲染
+ * IDW
  * @author 李志伟
  */
 
 import React from 'react';
 import {
   Map,
-  Point,
-  Polyline,
-  SimpleFillSymbol,
   FeatureClass,
   FeatureLayer,
   SimpleRenderer,
-  ClassRenderer,
-  ClassRendererItem,
   Field,
-  FieldType,
+  InverseDistanceWeight,
+  RasterLayer,
   GeometryType,
-  Graphic,
-  SimpleMarkerSymbol,
-  Feature,
-  LatLngType,
   GCJ02,
+  LatLngType,
 } from '@src/library/green-gis-js/src/index';
 let amap = null;
 let map = null;
-export default class ClassRendererComponent extends React.Component {
+export default class IdwComponent extends React.Component {
   componentDidMount() {
     amap = new window['AMap'].Map('amap', {
       fadeOnZoom: false,
@@ -52,23 +45,28 @@ export default class ClassRendererComponent extends React.Component {
     map.setProjection(new GCJ02(LatLngType.GPS));
     const req = new XMLHttpRequest();
     req.onload = event => {
-      const featureClass = new FeatureClass(GeometryType.Point);
+      const featureClass = new FeatureClass(GeometryType.Polygon);
       featureClass.loadGeoJSON(JSON.parse(req.responseText));
       const featureLayer = new FeatureLayer();
       featureLayer.featureClass = featureClass;
+      const renderer = new SimpleRenderer();
+      featureLayer.renderer = renderer;
+      featureLayer.zoom = [10, 20];
+
       const field = new Field();
       field.name = 'DEPTH';
-      field.type = FieldType.Number;
-      const renderer = new ClassRenderer();
-      renderer.generate(featureClass, field, 5);
-      featureLayer.renderer = renderer;
-      featureLayer.zoom = [5, 20];
-      map.addLayer(featureLayer);
+      const idw = new InverseDistanceWeight();
+      idw.honey = true;
+      idw.honeySide = 10;
+      idw.generate(featureClass, field);
+      const rasterLayer = new RasterLayer();
+      rasterLayer.raster = idw;
+      map.addLayer(rasterLayer);
     };
-    req.open('GET', '/public/geojson/junction.json', true);
+    req.open('GET', '/public/geojson/sensor.json', true);
     req.send(null);
     // 缩放级别要为整数，不然会出现点位每次重绘 位置都会变化的情况
-    map.setView([109.519, 18.271], 14);
+    map.setView([109.519, 18.271], 13);
   }
   componentWillUnmount() {
     map.destroy();

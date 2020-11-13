@@ -95,6 +95,7 @@ export const routesConfig: RouteConfigDeclaration[] = [
         path: '/mainPage',
         // exact: true,
         isDynamic: true,
+        isRedirect: true,
         loadingFallback: '不一样的 loading 内容...',
         component: React.lazy(() =>
           import(/* webpackChunkName: "mainPage"*/ '@src/views/main-page/MainPage'),
@@ -175,12 +176,111 @@ export const routesConfig: RouteConfigDeclaration[] = [
               import(/* webpackChunkName: "child-one" */ '@src/views/main-page/cluster/Cluster'),
             ),
           },
+          {
+            path: '/mainPage/LetterSymbol',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/letter-symbol/LetterSymbol'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/ArrowSymbol',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/arrow-symbol/ArrowSymbol'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/CustomSymbol',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/custom-symbol/CustomSymbol'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/PointAnimation',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/animation/PointAnimation'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/LineAnimation',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/animation/LineAnimation'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/ParticleAnimation',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/animation/ParticleAnimation'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/Heat',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/rasterLayer/Heat'),
+            ),
+          },
+          {
+            path: '/mainPage/Idw',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/rasterLayer/Idw'),
+            ),
+          },
+          {
+            path: '/mainPage/Kriging',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/rasterLayer/Kriging'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/BaiduMap',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/basic/BaiduMap'),
+            ),
+          },
+          {
+            path: '/mainPage/Tile',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/basic/Tile'),
+            ),
+          },
+          {
+            path: '/mainPage/TileOfflineZnv',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/basic/TileOfflineZnv'
+              ),
+            ),
+          },
         ],
       },
       {
         path: '/login',
         isDynamic: true,
-        isRedirect: true,
         component: React.lazy(() =>
           import(
             /* webpackChunkName: "login" */

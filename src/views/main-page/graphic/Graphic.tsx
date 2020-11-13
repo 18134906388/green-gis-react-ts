@@ -14,10 +14,11 @@ import {
   SimpleMarkerSymbol,
   GraphicLayer,
 } from '@src/library/green-gis-js/src/index';
-
+let amap = null;
+let map = null;
 export default class GraphicComponent extends React.Component {
   componentDidMount() {
-    const amap = new window['AMap'].Map('amap', {
+    amap = new window['AMap'].Map('amap', {
       fadeOnZoom: false,
       navigationMode: 'classic',
       optimizePanAnimation: false,
@@ -34,7 +35,7 @@ export default class GraphicComponent extends React.Component {
       features: ['road', 'point', 'bg'],
       viewMode: '2D',
     });
-    const map = new Map('foo');
+    map = new Map('foo');
     map.on('extent', event => {
       amap.setZoomAndCenter(event.zoom, event.center);
     });
@@ -80,6 +81,12 @@ export default class GraphicComponent extends React.Component {
       }
     }
     map.setView([0, 0], 3);
+  }
+  componentWillUnmount() {
+    map.destroy();
+    amap.destroy();
+    amap = null;
+    map = null;
   }
   render() {
     return (

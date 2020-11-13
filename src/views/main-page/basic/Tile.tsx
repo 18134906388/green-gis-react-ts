@@ -1,5 +1,5 @@
 /**
- * 高德地图基础应用、以及投影变换的使用
+ * 静态切片
  * @author 李志伟
  */
 
@@ -15,31 +15,14 @@ import {
   GCJ02,
   LatLngType,
 } from '@src/library/green-gis-js/src/index';
-let amap = null;
+
 let map = null;
 export default class BasicComponent extends React.Component {
   componentDidMount() {
-    amap = new window['AMap'].Map('amap', {
-      fadeOnZoom: false,
-      navigationMode: 'classic',
-      optimizePanAnimation: false,
-      animateEnable: false,
-      dragEnable: false,
-      zoomEnable: false,
-      resizeEnable: true,
-      doubleClickZoom: false,
-      keyboardEnable: false,
-      scrollWheel: false,
-      expandZoomRange: true,
-      zooms: [1, 20],
-      mapStyle: 'amap://styles/fresh',
-      features: ['road', 'point', 'bg'],
-      viewMode: '2D',
-    });
     map = new Map('foo');
-    map.on('extent', event => {
-      amap.setZoomAndCenter(event.zoom, event.center);
-    });
+    map.setTileUrl(
+      'http://wprd01.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scl=1&style=6',
+    );
     // 投影变换要最早设置
     map.setProjection(new GCJ02(LatLngType.GPS));
     const marker = new SimpleMarkerSymbol();
@@ -81,8 +64,6 @@ export default class BasicComponent extends React.Component {
   }
   componentWillUnmount() {
     map.destroy();
-    amap.destroy();
-    amap = null;
     map = null;
   }
   render() {

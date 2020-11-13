@@ -1,5 +1,5 @@
 /**
- * 高德地图基础应用、以及投影变换的使用
+ * 百度地图基础应用、以及投影变换的使用
  * @author 李志伟
  */
 
@@ -15,33 +15,21 @@ import {
   GCJ02,
   LatLngType,
 } from '@src/library/green-gis-js/src/index';
-let amap = null;
+let bmap = null;
 let map = null;
 export default class BasicComponent extends React.Component {
   componentDidMount() {
-    amap = new window['AMap'].Map('amap', {
-      fadeOnZoom: false,
-      navigationMode: 'classic',
-      optimizePanAnimation: false,
-      animateEnable: false,
-      dragEnable: false,
-      zoomEnable: false,
-      resizeEnable: true,
-      doubleClickZoom: false,
-      keyboardEnable: false,
-      scrollWheel: false,
-      expandZoomRange: true,
-      zooms: [1, 20],
-      mapStyle: 'amap://styles/fresh',
-      features: ['road', 'point', 'bg'],
-      viewMode: '2D',
+    bmap = new window['BMap'].Map(document.getElementById('amap'), {
+      enableMapClick: false,
     });
     map = new Map('foo');
     map.on('extent', event => {
-      amap.setZoomAndCenter(event.zoom, event.center);
+      bmap.centerAndZoom(new window['BMap'].Point(event.center[0], event.center[1]), event.zoom);
     });
+    // 百度地图20级会出现点位每次重绘 位置都会变化的情况
+    map.maxZoom = 19;
     // 投影变换要最早设置
-    map.setProjection(new GCJ02(LatLngType.GPS));
+    map.setProjection(new BD09(LatLngType.GPS));
     const marker = new SimpleMarkerSymbol();
     marker.width = 32;
     marker.height = 32;
@@ -81,8 +69,9 @@ export default class BasicComponent extends React.Component {
   }
   componentWillUnmount() {
     map.destroy();
-    amap.destroy();
-    amap = null;
+    // 百度地图（webgl除外）没有销毁方法
+    // bmap.destroy();
+    bmap = null;
     map = null;
   }
   render() {
