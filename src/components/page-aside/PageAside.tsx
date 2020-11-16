@@ -17,7 +17,9 @@ let menuData = {
 export class PageAside extends React.Component {
   handleClick = e => {
     menuData = {
-      currentOpenKeys: e.keyPath,
+      currentOpenKeys: menuData.currentOpenKeys.includes(e.keyPath[1])
+        ? menuData.currentOpenKeys
+        : menuData.currentOpenKeys.concat(e.keyPath),
       currentSelectedKeys: [e.key],
     };
     history.push(e.key);
