@@ -39,6 +39,6 @@ export * from './layer/raster-layer';
 export * from './analysis/interpolation/kriging';
 export * from './analysis/heat/heat';
 export * from './analysis/interpolation/inverse-distance-weight';
-export * from './tile';
+export * from './tile/tile-gaode';
+export * from './tile/tile-offline-znv';
 export * from './measurer';
-export * from './tile_offline_znv';

@@ -19,7 +19,8 @@ import { MultiplePolyline } from './geometry/multiple-polyline';
 import { SimpleFillSymbol, SimpleLineSymbol, SimplePointSymbol } from './symbol/symbol';
 import { MultiplePolygon } from './geometry/multiple-polygon';
 import { Polygon } from './geometry/polygon';
-import { Tile } from './tile';
+import { Tile } from './tile/tile';
+import { TileGaode } from './tile/tile-gaode';
 import { Measurer } from './measurer';
 
 /**
@@ -234,7 +235,7 @@ export class Map extends Subject {
     //animator
     this._animator = new Animator(this);
     //tile
-    this._tile = new Tile(this);
+    this._tile = new TileGaode(this);
     //tooltip
     this._tooltip = new Tooltip(this);
 
@@ -276,6 +277,14 @@ export class Map extends Subject {
    */
   enableDoubleClick() {
     this._option.disableDoubleClick = false;
+  }
+
+  /**
+   * 设置瓦片地图
+   * @param {Tile} tile - 设置瓦片地图
+   */
+  set tile(value: Tile) {
+    this._tile = value;
   }
 
   /**

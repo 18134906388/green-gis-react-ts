@@ -14,12 +14,14 @@ import {
   BD09,
   GCJ02,
   LatLngType,
+  TileOfflineZnv,
 } from '@src/library/green-gis-js/src/index';
 
 let map = null;
 export default class BasicComponent extends React.Component {
   componentDidMount() {
     map = new Map('foo');
+    map.tile = new TileOfflineZnv(map);
     map.setTileUrl('http://10.45.157.179:8008/{z}/{y}/{x}.png');
     // 投影变换要最早设置
     map.setProjection(new GCJ02(LatLngType.GPS));
