@@ -276,6 +276,61 @@ export const routesConfig: RouteConfigDeclaration[] = [
               ),
             ),
           },
+          {
+            path: '/mainPage/FitBound',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/fit-Bound/FitBound'),
+            ),
+          },
+          {
+            path: '/mainPage/Tooltip',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/tooltip/Tooltip'),
+            ),
+          },
+          {
+            path: '/mainPage/Selection',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/selection/Selection'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/Measurer',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/measurer/Measurer'),
+            ),
+          },
+          {
+            path: '/mainPage/EditorPoint',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(/* webpackChunkName: "child-one" */ '@src/views/main-page/editor/EditorPoint'),
+            ),
+          },
+          {
+            path: '/mainPage/EditorPolygon',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/editor/EditorPolygon'
+              ),
+            ),
+          },
+          {
+            path: '/mainPage/EditorPolyline',
+            isDynamic: true,
+            component: React.lazy(() =>
+              import(
+                /* webpackChunkName: "child-one" */ '@src/views/main-page/editor/EditorPolyline'
+              ),
+            ),
+          },
         ],
       },
       {

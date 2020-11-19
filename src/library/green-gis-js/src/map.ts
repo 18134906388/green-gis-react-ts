@@ -337,7 +337,7 @@ export class Map extends Subject {
    */
   fitBound(bound: Bound) {
     const origin = bound.getCenter();
-    const center = this._projection.unproject(origin as any);
+    const center = this._projection.unproject(origin as any, true);
     bound.scale(2);
     const x_mpp = (bound.xmax - bound.xmin) / this._canvas.width; //x  meter per pixel
     const y_mpp = (bound.ymax - bound.ymin) / this._canvas.height; //y  meter per pixel
@@ -528,6 +528,7 @@ export class Map extends Subject {
     const x = (event.offsetX - matrix.e) / matrix.a;
     const y = (event.offsetY - matrix.f) / matrix.d;
     [event.lng, event.lat] = this._projection.unproject([x, y]);
+    [event.originalLng, event.originalLat] = this._projection.unproject([x, y], true);
     if (this._editor && this._editor.editing) {
       this._editor._onClick(event);
       return;
@@ -589,6 +590,7 @@ export class Map extends Subject {
       const x = (event.offsetX - matrix.e) / matrix.a;
       const y = (event.offsetY - matrix.f) / matrix.d;
       [event.lng, event.lat] = this._projection.unproject([x, y]);
+      [event.originalLng, event.originalLat] = this._projection.unproject([x, y], true);
       this._editor._onMouseMove(event);
       return;
     }
@@ -597,6 +599,7 @@ export class Map extends Subject {
       const x = (event.offsetX - matrix.e) / matrix.a;
       const y = (event.offsetY - matrix.f) / matrix.d;
       [event.lng, event.lat] = this._projection.unproject([x, y]);
+      [event.originalLng, event.originalLat] = this._projection.unproject([x, y], true);
       this._measurer._onMouseMove(event);
       return;
     }

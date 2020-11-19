@@ -45,12 +45,8 @@ export class PageAside extends React.Component {
             </span>
           }
         >
-          <Menu.ItemGroup key="g1" title="Graphic">
-            <Menu.Item key="/mainPage/Graphic">Graphic</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup key="g2" title="Feature">
-            <Menu.Item key="3">Feature</Menu.Item>
-          </Menu.ItemGroup>
+          <Menu.Item key="/mainPage/Graphic">GraphicLayer</Menu.Item>
+          <Menu.Item key="/mainPage/SimpleRenderer">FeatureLayer</Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="切换底图">
           <Menu.Item key="/mainPage/Basic">在线高德</Menu.Item>
@@ -85,6 +81,23 @@ export class PageAside extends React.Component {
           <Menu.Item key="/mainPage/Heat">热力图</Menu.Item>
           <Menu.Item key="/mainPage/Kriging">Kriging插值</Menu.Item>
           <Menu.Item key="/mainPage/Idw">IDW插值</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub9" icon={<AppstoreOutlined />} title="自适应缩放">
+          <Menu.Item key="/mainPage/FitBound">FitBound</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub10" icon={<AppstoreOutlined />} title="悬浮弹框">
+          <Menu.Item key="/mainPage/Tooltip">Tooltip</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub11" icon={<AppstoreOutlined />} title="图层选择器">
+          <Menu.Item key="/mainPage/Selection">Selection</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub12" icon={<AppstoreOutlined />} title="测量">
+          <Menu.Item key="/mainPage/Measurer">Measurer</Menu.Item>
+        </SubMenu>
+        <SubMenu key="sub13" icon={<AppstoreOutlined />} title="编辑器">
+          <Menu.Item key="/mainPage/EditorPoint">EditorPoint</Menu.Item>
+          <Menu.Item key="/mainPage/EditorPolyline">EditorPolyline</Menu.Item>
+          <Menu.Item key="/mainPage/EditorPolygon">EditorPolygon</Menu.Item>
         </SubMenu>
       </Menu>
     );
