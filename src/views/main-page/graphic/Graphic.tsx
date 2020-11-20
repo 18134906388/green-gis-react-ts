@@ -11,7 +11,8 @@ import {
   Graphic,
   SimpleLineSymbol,
   SimplePointSymbol,
-  SimpleMarkerSymbol,
+  GCJ02,
+  LatLngType,
   GraphicLayer,
 } from '@src/library/green-gis-js/src/index';
 let amap = null;
@@ -39,7 +40,8 @@ export default class GraphicComponent extends React.Component {
     map.on('extent', event => {
       amap.setZoomAndCenter(event.zoom, event.center);
     });
-
+    // 投影变换要最早设置
+    map.setProjection(new GCJ02(LatLngType.GPS));
     //画经线
     const lngLayer = new GraphicLayer();
     map.addLayer(lngLayer);

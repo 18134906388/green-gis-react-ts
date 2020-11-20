@@ -38,6 +38,7 @@ export default class BasicComponent extends React.Component {
     });
     map = new Map('foo');
     map.on('extent', event => {
+      // event.center为偏移后的高德坐标
       amap.setZoomAndCenter(event.zoom, event.center);
     });
     // 投影变换要最早设置
