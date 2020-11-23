@@ -13,6 +13,8 @@ import {
   SimpleLineSymbol,
   BD09,
   GCJ02,
+  Polygon,
+  SimpleFillSymbol,
   LatLngType,
 } from '@src/library/green-gis-js/src/index';
 
@@ -59,6 +61,34 @@ export default class BasicComponent extends React.Component {
     symbol2.strokeStyle = '#000000';
     const graphic2 = new Graphic(polyline2, symbol2);
     map.addGraphic(graphic2);
+
+    const polygon = new Polygon([
+      [
+        [116.326, 39.8969],
+        [116.3342, 39.8975],
+        [116.3466, 39.8982],
+        [116.3548, 39.901],
+        [116.3576, 39.8989],
+        [116.396, 39.9003],
+        [116.3988, 39.8893],
+        [116.3988, 39.8728],
+        [116.3933, 39.8721],
+        [116.3809, 39.8714],
+        [116.3507, 39.8694],
+        [116.3493, 39.8742],
+        [116.3452, 39.8735],
+        [116.3425, 39.8763],
+        [116.3205, 39.8749],
+        [116.3219, 39.8831],
+        [116.3246, 39.8852],
+        [116.3246, 39.89],
+        [116.326, 39.89],
+        [116.326, 39.8969],
+      ],
+    ]);
+    const symbol3 = new SimpleFillSymbol();
+    const graphic3 = new Graphic(polygon, symbol3);
+    map.addGraphic(graphic3);
     // 缩放级别要为整数，不然会出现点位每次重绘 位置都会变化的情况
     map.setView([116.391193, 39.907776], 12);
   }
